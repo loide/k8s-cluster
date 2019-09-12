@@ -2,12 +2,10 @@
 
 A vagrant script to deploy a Kubernetes cluster.
 
-----
 ## Requirements
 * Vagrant
 * Virtualbox
 
-----
 ## How to Deploy
 Download the code and execute the following command in the same folder as the Vagrantfile:
 
@@ -20,7 +18,6 @@ required, you can add more by editing the servers array in the Vagrantfile.
 
 This process will take some time, so go grab a coffee :)
 
-----
 ## Testing
 
 ```
@@ -38,7 +35,6 @@ k8s-node1    Ready    <none>   3m41s   v1.15.3
 k8s-node2    Ready    <none>   85s     v1.15.3
 ```
 
-----
 ## Cleanup
 ```
 vagrant halt
