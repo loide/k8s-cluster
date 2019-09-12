@@ -13,6 +13,30 @@ Download the code and execute the following command in the same folder as the Va
 vagrant up
 ```
 
-It will create 3 nodes (1 master and 2 workers).
+It will create 3 nodes (1 master and 2 workers). If more than 2 nodes are
+required, you can add more by editing the servers array in the Vagrantfile.
 
 This process will take some time, so go grab a coffee :)
+
+## Testing
+
+```
+vagrant ssh k8s-master
+kubectl get nodes
+```
+
+This last command should show the nodes status.
+
+```
+vagrant@k8s-master:~$ kubectl get nodes
+NAME         STATUS   ROLES    AGE     VERSION
+k8s-master   Ready    master   5m51s   v1.15.3
+k8s-node1    Ready    <none>   3m41s   v1.15.3
+k8s-node2    Ready    <none>   85s     v1.15.3
+```
+
+## Cleanup
+```
+vagrant halt
+vagrant destroy -f
+```
