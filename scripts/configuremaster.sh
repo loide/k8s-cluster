@@ -17,7 +17,9 @@ chown $(id -u vagrant):$(id -g vagrant) /home/vagrant/.kube/config
 
 # install Calico pod network addon
 export KUBECONFIG=/etc/kubernetes/admin.conf
-kubectl create -f https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/calico.yaml
+kubectl apply -f https://raw.githubusercontent.com/loide/k8s-cluster/master/calico/rbac-kdd.yaml
+kubectl apply -f https://raw.githubusercontent.com/loide/k8s-cluster/master/calico/calico.yaml
+
 kubeadm token create --print-join-command >> /etc/kubeadm_join_cmd.sh
 chmod +x /etc/kubeadm_join_cmd.sh
 
