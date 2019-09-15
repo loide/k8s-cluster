@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Configuring master......................................................."
+apt-get install -y python3-pip
 # ip of this box
 IP_ADDR=`ifconfig enp0s8 | grep -i Mask | awk '{print $2}'| cut -f2 -d:`
 
@@ -26,3 +27,6 @@ chmod +x /etc/kubeadm_join_cmd.sh
 # required for setting up password less ssh between guest VMs
 sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo service sshd restart
+
+kubectl run nginx-demo --image=nginx --port=80 --labels="name=nginx-demo"
+kubectl create -f https://raw.githubusercontent.com/loide/k8s-cluster/master/scripts/nginx-demo.yaml
