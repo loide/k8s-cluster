@@ -19,7 +19,7 @@ Also, the provision create and run nginx service on the cluster.
 
 This process will take some time, so go grab a coffee :)
 
-After all deployment, you should see a list with all pods running in all
+After all deployment, you should see a list with all running pods in all
 namespaces.
 
 
@@ -41,7 +41,7 @@ k8s-node1    Ready    <none>   3m41s   v1.15.3
 k8s-node2    Ready    <none>   85s     v1.15.3
 ```
 
-There is a python script on vagrant home that shows all the pods running. This
+There is a python script on master vm's home that shows all the pods running. This
 script is executed after the ```vagrant up```.
 
 ```
