@@ -14,7 +14,7 @@ servers = [
         :box => "ubuntu/xenial64",
         :ip => "192.168.50.11",
         :mem => "1024",
-        :cpu => "1"
+        :cpu => "2"
     },
     {
         :name => "k8s-node2",
@@ -22,7 +22,7 @@ servers = [
         :box => "ubuntu/xenial64",
         :ip => "192.168.50.12",
         :mem => "1024",
-        :cpu => "1"
+        :cpu => "2"
     }
 ]
 
@@ -42,8 +42,16 @@ Vagrant.configure("2") do |config|
 
             if opts[:type] == "master"
                 config.vm.provision "shell", path: "scripts/configuremaster.sh"
+                config.vm.provision "file", source: "pyclient", destination: "pyclient"
             else
                 config.vm.provision "shell", path: "scripts/configurenode.sh"
+            end
+
+            # trigger command on master after the last node is up
+            config.trigger.after :up do |t|
+                t.only_on = "k8s-node2"
+                t.info = "Running after the last node is up"
+                t.run = {inline: "vagrant ssh k8s-master -c 'pip3 install -r pyclient/requirements.txt  && python3 pyclient/main.py'"}
             end
         end
     end
